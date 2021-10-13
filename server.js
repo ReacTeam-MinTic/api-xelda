@@ -1,19 +1,12 @@
 import Express from "express";
-import { MongoClient, ObjectId } from "mongodb";
 import dotenv from 'dotenv';
 import Cors from "cors";
+import {conectionDB, getDB} from "./db/db.js"
+import { MongoClient, ObjectId } from "mongodb";
 
 dotenv.config({path: './.env'});
-const stringConection = process.env.DATABASE_URL;
-  
-const client = new MongoClient(stringConection, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
 const app = Express();
 app.use(Express.json());
-
 app.use(Cors());
 
 app.patch('/editar/usuarios', (req, res) => {
@@ -24,6 +17,7 @@ app.patch('/editar/usuarios', (req, res) => {
   const operation = {
     $set: edit,
   };
+  const conexion = getDB();
   conexion
     .collection("users")
     .findOneAndUpdate(
@@ -46,7 +40,8 @@ app.get("/users", (req, res) => {
   console.log(
     "Esta es la función que se ejecuta cuando se llama a la ruta /users"
   );
-  conexion
+  const conexion = getDB();
+    conexion
     .collection("users")
     .find({})
     .limit(50)
@@ -70,6 +65,7 @@ app.post("/usuario/nuevo", (req, res) => {
       Object.keys(datesUsers).includes("role") &&
       Object.keys(datesUsers).includes("email")
     ) {
+      const conexion = getDB();
       conexion.collection("users").insertOne(datesUsers, (err, result) => {
         if (err) {
           console.log(err);
@@ -92,6 +88,7 @@ app.post("/usuario/nuevo", (req, res) => {
 
 app.delete("/eliminar/usuarios", (req, res) => {
   const filterUser = { _id: new ObjectId(req.body._id) };
+  const conexion = getDB();
   conexion.collection("users").deleteOne(filterUser, (err, result) => {
     if (err) {
       console.error("Error al eliminar el usuasio", err);
@@ -103,19 +100,11 @@ app.delete("/eliminar/usuarios", (req, res) => {
   });
 });
 
-let conexion;
+
 const main = () => {
-  client.connect((err, db) => {
-    if (err) {
-      console.error("Error al conectar a la base de datos");
-      return "error";
-    }
-    conexion = db.db("concesionario");
-    console.log("Conexión exitosa");
-    return app.listen(process.env.PORT, () => {
-      console.log(`Escuchando al puerto: ${process.env.PORT}`);
-    });
+  return app.listen(process.env.PORT, () => {
+    console.log(`Escuchando al puerto: ${process.env.PORT}`);
   });
 };
 
-main();
+conectionDB(main());
