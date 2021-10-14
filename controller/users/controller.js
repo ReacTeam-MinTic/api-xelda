@@ -27,7 +27,6 @@ const createUsers = async (datesUsers, callback) => {
 };
 
 const editUsers = async (edit, callback)=>{
-  
   const filterUser = { _id: new ObjectId(edit.id) };
   delete edit.id;
   const operation = {
