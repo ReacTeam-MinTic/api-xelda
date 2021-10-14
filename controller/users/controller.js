@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 import { getDB } from '../../db/db.js';
 
 
-
+//MÓDULO DE USUARIOS
 const queryAllUsers = async (callback) => {
     const conexion = getDB();
       await conexion
@@ -51,5 +51,6 @@ const deleteUsers = async (_id, callback) => {
   const conexion = getDB();
   await conexion.collection('users').deleteOne(filterUser, callback);
 };
+
 
 export {queryAllUsers, createUsers, editUsers, deleteUsers};
