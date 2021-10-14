@@ -1,40 +1,42 @@
-import { getDB } from "../../db/db.js";
-import { ObjectId } from "bson";
+
+import { ObjectId } from 'mongodb';
+import { getDB } from '../../db/db.js';
+
+
 
 const queryAllUsers = async (callback) => {
     const conexion = getDB();
       await conexion
-      .collection("users")
+      .collection('users')
       .find()
       .limit(50)
       .toArray(callback);
-}
+};
 
 const createUsers = async (datesUsers, callback) => {
     
     if (
-      Object.keys(datesUsers).includes("name") &&
-      Object.keys(datesUsers).includes("lastname") &&
-      Object.keys(datesUsers).includes("state") &&
-      Object.keys(datesUsers).includes("role") &&
-      Object.keys(datesUsers).includes("email")
+      Object.keys(datesUsers).includes('name') &&
+      Object.keys(datesUsers).includes('lastname') &&
+      Object.keys(datesUsers).includes('state') &&
+      Object.keys(datesUsers).includes('role') &&
+      Object.keys(datesUsers).includes('email')
     ) {
       const conexion = getDB();
-      conexion.collection("users").insertOne(datesUsers, callback);
+      await conexion.collection('users').insertOne(datesUsers, callback);
     }else {
-        return "error";
+        return 'error';
     }
 };
 
-const editUsers = async (edit, callback)=>{
-  const filterUser = { _id: new ObjectId(edit.id) };
-  delete edit.id;
+const editUsers = async (id, edit, callback) => {
+  const filterUser = { _id: new ObjectId(id) };
   const operation = {
     $set: edit,
   };
   const conexion = getDB();
   await conexion
-    .collection("users")
+    .collection('users')
     .findOneAndUpdate(
       filterUser,
       operation,
@@ -42,6 +44,12 @@ const editUsers = async (edit, callback)=>{
       callback
     );
 
-}
+};
 
-export {queryAllUsers, createUsers, editUsers};
+const deleteUsers = async (_id, callback) => {
+  const filterUser = { _id: new ObjectId(_id) };
+  const conexion = getDB();
+  await conexion.collection('users').deleteOne(filterUser, callback);
+};
+
+export {queryAllUsers, createUsers, editUsers, deleteUsers};

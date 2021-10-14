@@ -1,7 +1,7 @@
 import Express from "express";
+import Cors from 'cors';
 import dotenv from 'dotenv';
-import Cors from "cors";
-import {conectionDB} from "./db/db.js"
+import {conectionDB, getDB} from "./db/db.js"
 import rutaUsers from "./views/users/rutas.js";
 
 dotenv.config({path: './.env'});
