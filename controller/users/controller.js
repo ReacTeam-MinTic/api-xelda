@@ -1,10 +1,11 @@
 import { getDB } from "../../db/db.js";
+import { ObjectId } from "bson";
 
 const queryAllUsers = async (callback) => {
     const conexion = getDB();
       await conexion
       .collection("users")
-      .find({})
+      .find()
       .limit(50)
       .toArray(callback);
 }
@@ -22,7 +23,26 @@ const createUsers = async (datesUsers, callback) => {
       conexion.collection("users").insertOne(datesUsers, callback);
     }else {
         return "error";
-    };
+    }
 };
 
-export {queryAllUsers, createUsers};
+const editUsers = async (edit, callback)=>{
+  
+  const filterUser = { _id: new ObjectId(edit.id) };
+  delete edit.id;
+  const operation = {
+    $set: edit,
+  };
+  const conexion = getDB();
+  await conexion
+    .collection("users")
+    .findOneAndUpdate(
+      filterUser,
+      operation,
+      { upsert: true, returnOriginal: true }, 
+      callback
+    );
+
+}
+
+export {queryAllUsers, createUsers, editUsers};

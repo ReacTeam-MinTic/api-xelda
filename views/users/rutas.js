@@ -1,7 +1,6 @@
 import Express from "express";
 import { getDB } from "../../db/db.js";
-import ObjectId from "mongodb";
-import {queryAllUsers, createUsers } from "../../controller/users/controller.js";
+import {queryAllUsers, createUsers, editUsers } from "../../controller/users/controller.js";
 
 const rutaUsers = Express.Router();
 const genericCallBack = (res) => (err, result) => {
@@ -25,29 +24,7 @@ rutaUsers.route("/usuario/nuevo").post((req, res) => {
 });
 
 rutaUsers.route("/editar/usuarios").patch((req, res) => {
-  const edit = req.body;
-  const filterUser = { _id: new ObjectId(edit.id) };
-  delete edit.id;
-  const operation = {
-    $set: edit,
-  };
-  const conexion = getDB();
-  conexion
-    .collection("users")
-    .findOneAndUpdate(
-      filterUser,
-      operation,
-      { upsert: true, returnOriginal: true },
-      (err, result) => {
-        if (err) {
-          console.error("Error al actualizar el usuario", err);
-          res.sendStatus(500);
-        } else {
-          console.log("Actualización exitosa");
-          res.sendStatus(200);
-        }
-      }
-    );
+  editUsers(res.body, genericCallBack());
 });
 
 rutaUsers.route("/eliminar/usuarios").delete((req, res) => {
