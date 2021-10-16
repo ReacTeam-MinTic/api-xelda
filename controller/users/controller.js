@@ -13,6 +13,16 @@ const queryAllUsers = async (callback) => {
       .toArray(callback);
 };
 
+const queryOrCreateUser = async (callback)=>{
+  /* 1. obtener los datos del usuario desde el token */
+
+  /* 2.  Con Auth0 verificar si el usuario ya está en la BD o no*/
+
+  /* 3.  si el usuario ya está en BD devuelve info del usuario*/
+
+  /*  4. si el usuarios no está en la BD, lo crea y devulve la info*/
+}
+
 const createUsers = async (datesUsers, callback) => {
     
     if (

@@ -19,8 +19,13 @@ rutaUsers.route('/users').get((req, res) => {
   queryAllUsers(genericCallBack(res));
 });
 
-rutaUsers.route('/users').post((req, res) => {
+rutaUsers.route('/users').post((req, res) => { 
   createUsers(req.body, genericCallBack(res));
+});
+
+rutaUsers.route('/users/self').get((req, res) => {
+  console.log('Alguien hizo get en la ruta /self');
+  queryAllUsers(genericCallBack(res));
 });
 
 rutaUsers.route('/users/:id').patch((req, res) => {
