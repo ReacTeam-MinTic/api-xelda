@@ -1,7 +1,7 @@
 
 import { ObjectId } from 'mongodb';
 import { getDB } from '../../db/db.js';
-
+import jwt_decode from 'jwt-decode'
 
 //MÓDULO DE USUARIOS
 const queryAllUsers = async (callback) => {
@@ -13,9 +13,11 @@ const queryAllUsers = async (callback) => {
       .toArray(callback);
 };
 
-const queryOrCreateUser = async (callback)=>{
+const queryOrCreateUser = async (req, callback)=>{
   /* 1. obtener los datos del usuario desde el token */
+  const token = req.headers.authorization.split('Bearer ')[1]
 
+  console.log('token', jwt_decode(token))
   /* 2.  Con Auth0 verificar si el usuario ya está en la BD o no*/
 
   /* 3.  si el usuario ya está en BD devuelve info del usuario*/
@@ -63,4 +65,4 @@ const deleteUsers = async (_id, callback) => {
 };
 
 
-export {queryAllUsers, createUsers, editUsers, deleteUsers};
+export {queryAllUsers, queryOrCreateUser, createUsers, editUsers, deleteUsers};
