@@ -16,21 +16,21 @@ const queryAllUsers = async (callback) => {
 const queryOrCreateUser = async (req, callback)=>{
   /* 1. obtener los datos del usuario desde el token */
   const token = req.headers.authorization.split('Bearer ')[1]
-  const user = jwt_decode(token)['http://localhost/userData']
-  console.log(user)
+  const user_ = jwt_decode(token)['http://localhost/userData']
+  console.log(user_)
   /* 2.  Con Auth0 verificar si el usuario ya está en la BD o no*/
   const conexion = getDB()
-  await conexion.collection('users').findOne({ email: user.email}, async (err, response)=>{
+  await conexion.collection('users').findOne({ email: user_.email}, async (err, response)=>{
     console.log('Respuesta consulta BD: ', response)
     if(response){
       /* 3.  si el usuario ya está en BD devuelve info del usuario*/
       callback(err, response)
     }else{
       /*  4. si el usuarios no está en la BD, lo crea y devulve la info*/
-      user.auth0ID = user._id
-      delete user._id
-      user.rol = 'inactivo'
-      await creacionUsuario(user, (err, respuesta) => callback(err, user))
+      user_.auth0ID = user_._id
+      delete user_._id
+      user_.rol = 'inactivo'
+      await creacionUsuario(user_, (err, respuesta) => callback(err, user_))
     }
   })
 }
