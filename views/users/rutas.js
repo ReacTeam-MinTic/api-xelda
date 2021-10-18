@@ -26,7 +26,6 @@ rutaUsers.route('/users').post((req, res) => {
 rutaUsers.route('/users/self').get((req, res) => {
   console.log('Alguien hizo get en la ruta /self');
   queryOrCreateUser(req, genericCallBack(res))
-  /* queryAllUsers(genericCallBack(res)); */
 });
 
 rutaUsers.route('/users/:id').patch((req, res) => {

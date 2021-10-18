@@ -2,7 +2,6 @@
 import { ObjectId } from 'mongodb';
 import { getDB } from '../../db/db.js';
 import jwt_decode from 'jwt-decode'
-import { response } from 'express';
 
 //MÓDULO DE USUARIOS
 const queryAllUsers = async (callback) => {
