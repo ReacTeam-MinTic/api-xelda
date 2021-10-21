@@ -35,12 +35,6 @@ const queryOrCreateUsers = async (req, callback) => {
       }
       
     });
-  //   const options = { method: "GET", url: "http://localhost:5000/users/",
-  //   headers: {
-  //     Authorization: getToken(),
-  //   },
-  // };
-  //   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
 const createUsers = async (datesUsers, callback) => {
