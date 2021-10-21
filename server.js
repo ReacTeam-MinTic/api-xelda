@@ -7,8 +7,7 @@ import jwks from "jwks-rsa"
 import rutaUsers from "./views/users/rutas.js";
 import rutaProducts from "./views/products/rutas.js";
 import rutaSales from "./views/sales/rutas.js";
-import jwt from 'express-jwt'
-import jwks from 'jwks-rsa'
+
 
 
 dotenv.config({path: './.env'});
