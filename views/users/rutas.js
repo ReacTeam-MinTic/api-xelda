@@ -1,5 +1,5 @@
 import Express from 'express';
-import {queryAllUsers, createUsers, editUsers, deleteUsers } from '../../controller/users/controller.js';
+import {queryAllUsers, createUsers, editUsers, deleteUsers, queryOrCreateUsers } from '../../controller/users/controller.js';
 
 const rutaUsers = Express.Router();
 
@@ -19,7 +19,15 @@ rutaUsers.route('/users').get((req, res) => {
   queryAllUsers(genericCallBack(res));
 });
 
-rutaUsers.route('/users').post((req, res) => { 
+rutaUsers.route('/users/self').get((req, res) => {
+  console.log(
+    'Esta es la función que se ejecuta cuando se llama a la ruta /users/self'
+  );
+  //queryAllUsers(genericCallBack(res));
+  queryOrCreateUsers(req, genericCallBack(res));
+});
+
+rutaUsers.route('/users').post((req, res) => {
   createUsers(req.body, genericCallBack(res));
 });
 
