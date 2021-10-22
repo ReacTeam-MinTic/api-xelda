@@ -28,8 +28,8 @@ const queryOrCreateUsers = async (req, callback) => {
       } else {
         user_token.auth0ID = user_token._id;
         delete user_token._id;
-        user_token.role = "Pendiente";
-        user_token.status = "Inactivo";
+        user_token.role = "Sin Rol";
+        user_token.status = "Pendiente";
         await createUsers(user_token, (err, respuesta) => callback(err, user_token)
         );
       }
