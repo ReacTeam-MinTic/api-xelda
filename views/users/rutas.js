@@ -19,6 +19,7 @@ rutaUsers.route('/users').get((req, res) => {
   queryAllUsers(genericCallBack(res));
 });
 
+//Esta ruta funciona bien
 rutaUsers.route('/users/self').get((req, res) => {
   console.log(
     'Esta es la función que se ejecuta cuando se llama a la ruta /users/self'
