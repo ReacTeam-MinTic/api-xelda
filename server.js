@@ -7,6 +7,7 @@ import jwks from "jwks-rsa"
 import rutaUsers from "./views/users/rutas.js";
 import rutaProducts from "./views/products/rutas.js";
 import rutaSales from "./views/sales/rutas.js";
+import authorizationStatusUser from "./middleware/authorizaatedStatusUser.js";
 
 
 
@@ -27,10 +28,12 @@ issuer: 'https://misiontic-sales2021.us.auth0.com/',
 algorithms: ['RS256']
 });
 
+app.use(authorizationStatusUser);
 app.use(jwtCheck);
 app.use(rutaUsers);
 app.use(rutaProducts);
 app.use(rutaSales);
+
 
 const main = () => {
   return app.listen(process.env.PORT, () => {
