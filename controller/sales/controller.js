@@ -17,6 +17,8 @@ const queryAllSales = async (callback) => {
       Object.keys(datesSales).includes("customer") &&
       Object.keys(datesSales).includes("cost") &&
       Object.keys(datesSales).includes("amount") &&
+      Object.keys(datesSales).includes("seller") &&
+      Object.keys(datesSales).includes("products") &&
       Object.keys(datesSales).includes("total_value") 
 
     ) {
