@@ -9,10 +9,12 @@ import rutaProducts from "./views/products/rutas.js";
 import rutaSales from "./views/sales/rutas.js";
 import authorizationStatusUser from "./middleware/authorizaatedStatusUser.js";
 
-
-const port = process.env.PORT || 5000
 dotenv.config({path: './.env'});
+
+const port = process.env.PORT || 5000;
+
 const app = Express();
+
 app.use(Express.json());
 app.use(Cors());
 
@@ -28,8 +30,8 @@ issuer: "https://xelda.us.auth0.com/",
 algorithms: ['RS256']
 });
 
-app.use(authorizationStatusUser);
 app.use(jwtCheck);
+app.use(authorizationStatusUser);
 app.use(rutaUsers);
 app.use(rutaProducts);
 app.use(rutaSales);
