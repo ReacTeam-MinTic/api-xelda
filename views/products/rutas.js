@@ -5,7 +5,7 @@ const rutaProducts = Express.Router();
 
 const genericCallBack = (res) => (err, result) => {
   if (err) {
-    console.log("aqui", err);
+    //console.log("aqui", err);
     res.status(500).send('Error consultando los vehiculos');
   } else {
     res.json(result);
@@ -20,12 +20,20 @@ rutaProducts.route('/products').get((req, res) => {
 });
 
 rutaProducts.route('/products').post((req, res) => {
-    console.log("siii")
+    //console.log("siii", req)
   createProducts(req.body, genericCallBack(res));
 });
 
 rutaProducts.route('/products/:id').patch((req, res) => {
-  editProducts(req.params.id, req.body, genericCallBack(res));
+  const body_ = req.body;
+  if(parseInt(body_.inventory) > 0 ){
+    body_.status = "Disponible"
+  }else{
+    body_.status = "No disponible"
+  }
+  console.log("si", body_)
+  editProducts(req.params.id, body_, genericCallBack(res));
+  
 });
 
 rutaProducts.route('/products/:id').delete((req, res) => {

@@ -9,7 +9,7 @@ const queryAllProducts = async (callback) => {
   };
   
   const createProducts = async (datesProducts, callback) => {
-    console.log("datesProducts:", datesProducts)
+    //console.log("datesProducts:", datesProducts)
     if (
       Object.keys(datesProducts).includes("cod") &&
       Object.keys(datesProducts).includes("name") &&
@@ -51,4 +51,5 @@ const queryAllProducts = async (callback) => {
     createProducts,
     editProducts,
     deleteProducts,
+    editProductsFromSales,
   };

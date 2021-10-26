@@ -9,24 +9,23 @@ const queryAllSales = async (callback) => {
   };
   
   const createSales = async (datesSales, callback) => {
-    console.log("si.... datesSales", datesSales)
+    
+    // console.log("si.... datesSales", datesSales)
     if (
-      Object.keys(datesSales).includes("cod") &&
+       Object.keys(datesSales).includes("cod")  &&
       Object.keys(datesSales).includes("date") &&
       Object.keys(datesSales).includes("id_customer") &&
       Object.keys(datesSales).includes("customer") &&
-      Object.keys(datesSales).includes("cost") &&
-      Object.keys(datesSales).includes("amount") &&
       Object.keys(datesSales).includes("seller") &&
-      Object.keys(datesSales).includes("products") &&
-      Object.keys(datesSales).includes("total_value") 
+      Object.keys(datesSales).includes("products") 
+      // Object.keys(datesSales).includes("total_value") 
 
     ) {
       const conexion = getDB();
-      await conexion.collection("sales").insertOne(datesSales, callback);
-    } else {
-      return "error";
-    }
+      await conexion.collection("sales").insertOne(datesSales, callback);}
+    // } else {
+    //   return "error";
+    // }
   };
   
   const editSales = async (id, edit, callback) => {

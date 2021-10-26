@@ -22,7 +22,7 @@ const queryOrCreateUsers = async (req, callback) => {
   await conexion
     .collection("users")
     .findOne({ email: user_token.email }, async (err, response) => {
-      console.log("response consulta bd", response);
+      //console.log("response consulta bd", response);
       if (response) {
        callback(err, response)
       } else {
