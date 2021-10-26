@@ -9,10 +9,12 @@ import rutaProducts from "./views/products/rutas.js";
 import rutaSales from "./views/sales/rutas.js";
 import authorizationStatusUser from "./middleware/authorizaatedStatusUser.js";
 
-
-const port = process.env.PORT || 5000
 dotenv.config({path: './.env'});
+
+const port = process.env.PORT || 5000;
+
 const app = Express();
+
 app.use(Express.json());
 app.use(Cors());
 
@@ -21,15 +23,15 @@ var jwtCheck = jwt({
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: 'https://misiontic-sales2021.us.auth0.com/.well-known/jwks.json'
+      jwksUri: 'https://xelda.us.auth0.com/.well-known/jwks.json'
 }),
-audience: 'api-xelda-auth',
-issuer: 'https://misiontic-sales2021.us.auth0.com/',
+audience: 'api-autenticacion-xelda',
+issuer: "https://xelda.us.auth0.com/",
 algorithms: ['RS256']
 });
 
-app.use(authorizationStatusUser);
 app.use(jwtCheck);
+app.use(authorizationStatusUser);
 app.use(rutaUsers);
 app.use(rutaProducts);
 app.use(rutaSales);

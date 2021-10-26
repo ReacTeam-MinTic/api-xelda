@@ -15,7 +15,7 @@ let conexion;
 const conectionDB = (callback)=>{
     client.connect((err, db) => {
         if (err) {
-          console.error('Error al conectar a la base de datos');
+          console.error('Error al conectar a la BD');
           return 'error';
         }
         conexion = db.db('concesionario');

@@ -34,9 +34,7 @@ const queryAllSales = async (callback) => {
       $set: edit,
     };
     const conexion = getDB();
-    await conexion
-      .collection("sales")
-      .findOneAndUpdate(
+    await conexion.collection("sales").findOneAndUpdate(
         filterProduct,
         operation,
         { upsert: true, returnOriginal: true },

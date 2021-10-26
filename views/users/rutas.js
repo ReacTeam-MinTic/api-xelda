@@ -21,20 +21,13 @@ rutaUsers.route('/users').get((req, res) => {
 
 //Esta ruta funciona bien
 rutaUsers.route('/users/self').get((req, res) => {
-  console.log(
-    'Esta es la función que se ejecuta cuando se llama a la ruta /users/self'
-  );
+  console.log('Esta es la función que se ejecuta cuando se llama a la ruta /users/self');
   //queryAllUsers(genericCallBack(res));
   queryOrCreateUsers(req, genericCallBack(res));
 });
 
 rutaUsers.route('/users').post((req, res) => {
   createUsers(req.body, genericCallBack(res));
-});
-
-rutaUsers.route('/users/self').get((req, res) => {
-  console.log('Alguien hizo get en la ruta /self');
-  queryAllUsers(genericCallBack(res));
 });
 
 rutaUsers.route('/users/:id').patch((req, res) => {
