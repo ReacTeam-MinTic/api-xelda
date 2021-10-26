@@ -50,6 +50,5 @@ const queryAllProducts = async (callback) => {
     queryAllProducts,
     createProducts,
     editProducts,
-    deleteProducts,
-    editProductsFromSales,
+    deleteProducts
   };
