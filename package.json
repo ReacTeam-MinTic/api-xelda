@@ -1,6 +1,6 @@
 {
   "name": "api-modulo-ventas",
-  "version": "1",
+  "version": "1.0.0",
   "main": "server.js",
   "repository": "https://github.com/gustavodearmas/api-modulo-ventas.git",
   "author": "gadea",
