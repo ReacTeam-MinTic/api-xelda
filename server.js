@@ -25,7 +25,7 @@ var jwtCheck = jwt({
       jwksRequestsPerMinute: 5,
       jwksUri: 'https://xelda.us.auth0.com/.well-known/jwks.json'
 }),
-audience: 'api-autenticacion-xelda',
+audience: 'api-xelda-auth',
 issuer: "https://xelda.us.auth0.com/",
 algorithms: ['RS256']
 });
