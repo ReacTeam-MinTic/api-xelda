@@ -16,7 +16,7 @@ const queyUser = async (id, callback) => {
 
 const queryOrCreateUsers = async (req, callback) => {
   const token = req.headers.authorization.split("Bearer ")[1];
-  const user_token = jwt_decode(token)["http://localhost/userData"];
+  const user_token = jwt_decode(token)["https://secret-refuge-48972.herokuapp.com/userData"];
   const conexion = getDB();
   await conexion
     .collection("users")
